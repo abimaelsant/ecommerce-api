@@ -4,41 +4,41 @@
 const Route = use('Route')
 
 Route.group(() => {
-    /**
-     * Categories resource routes
-     */
-    
-    Route.resource('categories', 'CategoryController').apiOnly()
+   /**
+    * Categories resource routes
+    */
 
-    /**
-     * Products resource routes
-     */
+   Route.resource('categories', 'CategoryController').apiOnly()
 
-    Route.resource('products', 'ProductController').apiOnly()
+   /**
+    * Products resource routes
+    */
 
-    /**
-     * Coupon resource routes
-     */
+   Route.resource('products', 'ProductController').apiOnly()
 
-    Route.resource('coupons', 'CouponController').apiOnly()
+   /**
+    * Coupon resource routes
+    */
 
-    /**
-     * Order resource routes
-     */
+   Route.resource('coupons', 'CouponController').apiOnly()
 
-    Route.resource('orders', 'OrderController').apiOnly()
+   /**
+    * Order resource routes
+    */
 
-    /**
-     * Image resource routes
-     */
+   Route.resource('orders', 'OrderController').apiOnly()
 
-    Route.resource('images', 'ImageController').apiOnly()
+   /**
+    * Image resource routes
+    */
 
-    /**
-     * User resource routes
-     */
+   Route.resource('images', 'ImageController').apiOnly()
 
-    Route.resource('users', 'UserController').apiOnly()
- })
-    .prefix('v1/admin')
-    .namespace('Admin')
+   /**
+    * User resource routes
+    */
+
+   Route.resource('users', 'UserController').apiOnly()
+})
+   .prefix('v1/admin')
+   .namespace('Admin')
