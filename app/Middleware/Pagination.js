@@ -13,18 +13,24 @@ class Pagination {
     // call next to advance the request
 
     if(ctx.request.method() === 'GET') {
-      const page = parseInt(ctx.request.input('page'))
-      const limit = parseInt(ctx.request.input('limit'))
-
+      let page = parseInt(ctx.request.input('page'))
+      let limit = parseInt(ctx.request.input('limit'))
+      
+      if(isNaN(page) && isNaN(limit)) {
+        page = undefined,
+        limit = undefined
+      }
       //atrivui os valores passados via get para a propriedade pagination do objeto ctx (context)
       ctx.pagination = {
         page,
         limit
       }
 
-      const perpage = parseInt(ctx.request.input('perpage'))
-      if(perpage) 
+      let perpage = parseInt(ctx.request.input('perpage'))
+      if(perpage) {
+        if(isNaN(perpage)) perpage = undefined
         ctx.pagination.limit = perpage
+      } 
     }
     await next()
   }
