@@ -1,0 +1,12 @@
+<script src="https://unpkg.com/adonis-websocket-client/dist/ws.min.js"></script>
+<script>
+  const io = ws("ws://localhost:3333/", { secure: true, reconnection: true, rejectUnauthorized: false })
+  const client = io.channel('notifications')
+  client.connect(function (error, connected) {
+  if (error) {
+    console.log(error)
+    return
+  }
+  // all good
+})
+</script>

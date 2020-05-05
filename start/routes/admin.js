@@ -8,7 +8,12 @@ Route.group(() => {
     * Categories resource routes
     */
 
-   Route.resource('categories', 'CategoryController').apiOnly()
+   Route.resource('categories', 'CategoryController')
+      .apiOnly()
+      .validator(new Map([
+         [['categories.store'], ['Admin/StoreCategory']],
+         [['categories.update'], ['Admin/StoreCategory']]
+      ]))
 
    /**
     * Products resource routes
@@ -26,7 +31,14 @@ Route.group(() => {
     * Order resource routes
     */
 
-   Route.resource('orders', 'OrderController').apiOnly()
+   Route.post('orders/:id/discount', 'OrderController.applyDiscount')
+
+   Route.delete('orders/:id/discount', 'OrderController.removeDiscount')
+
+   Route.resource('orders', 'OrderController')
+      .apiOnly()
+      .validator(new Map([
+         [['orders.store'], ['Admin/StoreOrder']]]))
 
    /**
     * Image resource routes
@@ -38,7 +50,20 @@ Route.group(() => {
     * User resource routes
     */
 
-   Route.resource('users', 'UserController').apiOnly()
+   Route.resource('users', 'UserController')
+      .apiOnly()
+      .validator(new Map([
+         [['users.store'], ['Admin/StoreUser']],
+         [['users.update'], ['Admin/StoreUser']]
+      ]))
+
+   /**
+    * Dashboard Route
+    */
+
+   Route.get('dashboard', 'DashboardController.index').as('dashboard')
 })
    .prefix('v1/admin')
    .namespace('Admin')
+   //o is foi definido em kernel.js, verifica se 'É admin ou manager' 
+   .middleware(['auth', 'is:(admin || manager)'])
